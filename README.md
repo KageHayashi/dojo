@@ -36,6 +36,10 @@ curl -fsSL https://get.docker.com | /bin/sh
 
 Finally, run the infrastructure which will be hosted on domain `<DOMAIN>` with:
 ```sh
+./dojo.sh init
+./dojo.sh run
+```
+```sh
 SETUP_HOSTNAME=<DOMAIN> ./run.sh
 ```
 If not specified, `<DOMAIN>` will default to `localhost.pwn.college`, which means you can access the infrastructure through this domain.

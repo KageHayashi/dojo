@@ -68,7 +68,7 @@ elif [ "$ACTION" = "run" ]; then
            --name "$DOJO_HOST" \
            "$DOJO_HOST"
 
-    docker exec "$DOJO_HOST" logs
+    docker exec "$DOJO_HOST" dojo logs
 
 elif [ "$ACTION" = "stop" ]; then
     while [ $(docker ps -a -q -f name="$DOJO_HOST") ]; do

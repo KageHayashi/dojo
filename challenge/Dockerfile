@@ -56,6 +56,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
         python3-pip
         rubygems
         squashfs-tools
+        tcpdump
         unzip
         upx-ucl
         wget
@@ -164,13 +165,13 @@ RUN chmod +x rg
 
 ################################################################################
 
-FROM builder as builder-tcpdump
-RUN <<EOF
-    git clone https://github.com/the-tcpdump-group/tcpdump /opt/tcpdump
-    cd /opt/tcpdump
-    ./configure
-    make install
-EOF
+# FROM builder as builder-tcpdump
+# RUN <<EOF
+#     git clone https://github.com/the-tcpdump-group/tcpdump /opt/tcpdump
+#     cd /opt/tcpdump
+#     ./configure
+#     make install
+# EOF
 
 FROM builder as builder-capstone
 RUN <<EOF
@@ -401,7 +402,7 @@ ENV LC_CTYPE=C.UTF-8
 COPY --link --from=builder / /
 COPY --link --from=builder-kernel /opt/linux /opt/linux
 COPY --link --from=builder-code-server / /
-COPY --link --from=builder-tcpdump / /
+# COPY --link --from=builder-tcpdump / /
 COPY --link --from=builder-capstone / /
 COPY --link --from=builder-radare2 / /
 COPY --link --from=builder-aflplusplus / /
